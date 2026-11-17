@@ -17,7 +17,7 @@ class OrderPage(BasePage):
     @allure.step('Заполнить данные аренды')
     def fill_rent(self, data, delivery_date):
         self.fill(L.DATE, delivery_date)
-        self.visible(L.DATE).send_keys(Keys.ENTER)
+        self.send_keys(L.DATE, Keys.ENTER)
         self.click(L.PERIOD)
         self.click(L.period(data['period']))
         self.click(L.color(data['color']))
@@ -30,4 +30,4 @@ class OrderPage(BasePage):
 
     @allure.step('Прочитать сообщение об успешном заказе')
     def success_message(self):
-        return self.visible(L.SUCCESS).text
+        return self.get_text(L.SUCCESS)

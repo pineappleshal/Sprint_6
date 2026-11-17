@@ -4,6 +4,7 @@ import pytest
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.firefox.service import Service
+from pages.base_page import BasePage
 
 
 def pytest_addoption(parser):
@@ -32,9 +33,9 @@ def pytest_runtest_makereport(item, call):
     outcome = yield
     report = outcome.get_result()
     if report.failed and 'driver' in item.funcargs:
-        browser = item.funcargs['driver']
+        page = BasePage(item.funcargs['driver'])
         try:
-            allure.attach(browser.get_screenshot_as_png(), name='Ошибка', attachment_type=allure.attachment_type.PNG)
-            allure.attach(browser.current_url, name='URL', attachment_type=allure.attachment_type.TEXT)
+            allure.attach(page.get_screenshot(), name='Ошибка', attachment_type=allure.attachment_type.PNG)
+            allure.attach(page.get_current_url(), name='URL', attachment_type=allure.attachment_type.TEXT)
         except Exception:
             pass  # Ошибка вложения не должна скрыть исходную причину падения.

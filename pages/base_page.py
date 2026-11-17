@@ -1,3 +1,5 @@
+from urllib.parse import urlparse
+
 import allure
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -24,3 +26,28 @@ class BasePage:
         element = self.visible(locator)
         element.clear()
         element.send_keys(value)
+
+    def get_text(self, locator):
+        return self.visible(locator).text
+
+    def send_keys(self, locator, *keys):
+        self.visible(locator).send_keys(*keys)
+
+    def get_current_url(self):
+        return self.driver.current_url
+
+    def wait_for_url_host(self, hosts):
+        self.wait.until(lambda driver: urlparse(driver.current_url).hostname in hosts)
+        return self.get_current_url()
+
+    def get_window_handles(self):
+        return self.driver.window_handles
+
+    def switch_to_new_window(self, previous_handles):
+        self.wait.until(EC.new_window_is_opened(previous_handles))
+        new_handle = next(handle for handle in self.get_window_handles()
+                          if handle not in previous_handles)
+        self.driver.switch_to.window(new_handle)
+
+    def get_screenshot(self):
+        return self.driver.get_screenshot_as_png()
