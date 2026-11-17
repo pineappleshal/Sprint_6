@@ -22,10 +22,8 @@ def driver(request):
     browser = webdriver.Firefox(options=options, service=service)
     browser.set_window_size(1440, 1000)
     browser.set_page_load_timeout(60)
-    try:
-        yield browser
-    finally:
-        browser.quit()
+    yield browser
+    browser.quit()
 
 
 @pytest.hookimpl(hookwrapper=True)
