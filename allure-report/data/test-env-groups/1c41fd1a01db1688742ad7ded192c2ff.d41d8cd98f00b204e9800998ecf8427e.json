@@ -1,1 +1,1 @@
-{"id":"1c41fd1a01db1688742ad7ded192c2ff.d41d8cd98f00b204e9800998ecf8427e","fullName":"test.test_navigation.TestNavigation#test_scooter_logo","name":"Логотип Самоката возвращает с формы заказа на главную","status":"passed","testResultsByEnv":{"default":"6fa5b39429f8620a821020d8123c40d4"}}
+{"id":"1c41fd1a01db1688742ad7ded192c2ff.d41d8cd98f00b204e9800998ecf8427e","fullName":"test.test_navigation.TestNavigation#test_scooter_logo","name":"Логотип Самоката возвращает с формы заказа на главную","status":"passed","testResultsByEnv":{"default":"d3de5fae0fe441635a4cf53e6c38f844"}}
